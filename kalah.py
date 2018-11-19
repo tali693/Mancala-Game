@@ -7,8 +7,8 @@ class Kalah(object):
         self.board = self.board * 2
         self.player = 1
 
-    def get_board(self):
-        return self.board
+    def status(self):
+        return tuple(self.board)
 
     def play(self, hole):
         if hole < 0 or hole >= (self.holes * 2 + 2):
@@ -16,6 +16,13 @@ class Kalah(object):
 
         if self.board[hole] == 0:
             raise ValueError
+
+        for i in range(self.board[hole]):
+            index = hole + i + 1
+            if index >= (self.holes * 2 + 2):
+                index -= (self.holes * 2 + 2)
+            self.board[index] += 1
+        self.board[hole] = 0
 
         self.player = 2 if self.player == 1 else 1
 
