@@ -8,7 +8,6 @@ class KalahTestCase(unittest.TestCase):
         self.game = Kalah(6, 4)
 
     def test_1_1_initial_status(self):
-
         self.assertEqual(self.game.get_board(), [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0])
 
     def test_1_1_illegal_hole(self):
@@ -25,6 +24,11 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.play(3), "Player 2 plays next")
         self.assertEqual(self.game.play(12), "Player 1 plays next")
         self.assertEqual(self.game.play(5), "Player 2 plays next")
+
+    def test_1_2_two_simple_moves(self):
+        self.assertEqual(self.game.play(1), "Player 2 plays next")
+        self.assertEqual(self.game.play(7), "Player 1 plays next")
+
 
 if __name__ == '__main__':
     unittest.main()

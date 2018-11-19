@@ -8,7 +8,7 @@ class Kalah(object):
         self.player = 1
 
     def get_board(self):
-        return tuple(self.board)
+        return self.board
 
     def play(self, hole):
         if hole < 0 or hole >= (self.holes * 2 + 2):
