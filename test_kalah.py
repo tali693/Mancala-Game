@@ -13,6 +13,13 @@ class KalahTestCase(unittest.TestCase):
 
     def test_1_1_illegal_hole(self):
         self.assertRaises(IndexError, self.game.play, -1)
+        self.assertRaises(IndexError, self.game.play, -2)
+        self.assertRaises(IndexError, self.game.play, 14)
+        self.assertRaises(IndexError, self.game.play, 20)
+
+    def test_1_2_simple_move(self):
+        self.assertEqual(self.game.play(0), "Player 2 plays next")
+        self.assertEqual(self.game.play(8), "Player 1 plays next")
 
 if __name__ == '__main__':
     unittest.main()
