@@ -11,6 +11,8 @@ class KalahTestCase(unittest.TestCase):
 
         self.assertEqual(self.game.get_board(), [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0])
 
+    def test_1_1_illegal_hole(self):
+        self.assertRaises(IndexError, self.game.play, -1)
 
 if __name__ == '__main__':
     unittest.main()
