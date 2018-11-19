@@ -21,5 +21,10 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.play(0), "Player 2 plays next")
         self.assertEqual(self.game.play(8), "Player 1 plays next")
 
+    def test_1_2_crossing_move(self):
+        self.assertEqual(self.game.play(3), "Player 2 plays next")
+        self.assertEqual(self.game.play(12), "Player 1 plays next")
+        self.assertEqual(self.game.play(5), "Player 2 plays next")
+
 if __name__ == '__main__':
     unittest.main()
