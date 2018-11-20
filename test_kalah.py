@@ -75,6 +75,10 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
         self.assertRaises(ValueError, self.game.play, 1)
 
+    def test_1_3_bonus_move_player_1(self):
+        self.assertEqual(self.game.play(2), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 0, 5, 5, 5, 1, 4, 4, 4, 4, 4, 4, 0))
+
 
 if __name__ == '__main__':
     unittest.main()
