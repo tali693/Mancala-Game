@@ -12,9 +12,9 @@ class KalahTestCase(unittest.TestCase):
 
     def test_1_1_illegal_hole(self):
         self.assertRaises(IndexError, self.game.play, -1)
-        self.assertRaises(IndexError, self.game.play, -2)
         self.assertRaises(IndexError, self.game.play, 14)
         self.assertRaises(IndexError, self.game.play, 20)
+        self.assertRaises(IndexError, self.game.play, (len(self.game.status()) - 2) / 2)
 
     def test_1_2_simple_move(self):
         self.assertEqual(self.game.play(0), "Player 2 plays next")
@@ -67,6 +67,14 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (6, 2, 7, 1, 0, 8, 2, 0, 8, 7, 5, 0, 0, 2))
         self.assertEqual(self.game.play(5), "Player 2 plays next")
         self.assertEqual(self.game.status(), (7, 2, 7, 1, 0, 0, 3, 1, 9, 8, 6, 1, 1, 2))
+
+    def test_1_2_empty_hole(self):
+        self.assertEqual(self.game.play(1), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.play(7), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
+        self.assertRaises(ValueError, self.game.play, 1)
+
 
 if __name__ == '__main__':
     unittest.main()

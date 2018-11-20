@@ -14,12 +14,15 @@ class Kalah(object):
         if hole < 0 or hole > self.holes * 2:
             raise IndexError("Illegal hole!")
 
+        if hole == self.holes or hole == self.holes * 2 + 1:
+            raise IndexError("Bank!")
+
         if self.player == 1 and hole >= self.holes or \
                 self.player == 2 and hole < self.holes + 1:
             raise IndexError("Second player hole!")
 
         if self.board[hole] == 0:
-            raise ValueError
+            raise ValueError("Empty hole!")
 
         self.player = 2 if self.player == 1 else 1
 
