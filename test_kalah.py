@@ -48,5 +48,25 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.play(3), "Player 2 plays next")
         self.assertEqual(self.game.status(), (5, 1, 6, 0, 1, 7, 2, 2, 7, 6, 5, 0, 5, 1))
 
+    def test_1_2_crossing_other_bank(self):
+        self.assertEqual(self.game.play(1), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.play(7), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 0, 5, 5, 5, 5, 4, 0))
+        self.assertEqual(self.game.play(4), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 1, 1, 6, 6, 5, 5, 4, 0))
+        self.assertEqual(self.game.play(11), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (5, 1, 6, 5, 0, 6, 1, 1, 6, 6, 5, 0, 5, 1))
+        self.assertEqual(self.game.play(3), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (5, 1, 6, 0, 1, 7, 2, 2, 7, 6, 5, 0, 5, 1))
+        self.assertEqual(self.game.play(7), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (5, 1, 6, 0, 1, 7, 2, 0, 8, 7, 5, 0, 5, 1))
+        self.assertEqual(self.game.play(4), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (5, 1, 6, 0, 0, 8, 2, 0, 8, 7, 5, 0, 5, 1))
+        self.assertEqual(self.game.play(12), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (6, 2, 7, 1, 0, 8, 2, 0, 8, 7, 5, 0, 0, 2))
+        self.assertEqual(self.game.play(5), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (7, 2, 7, 1, 0, 0, 3, 1, 9, 8, 6, 1, 1, 2))
+
 if __name__ == '__main__':
     unittest.main()
