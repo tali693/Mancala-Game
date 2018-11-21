@@ -11,10 +11,11 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0))
 
     def test_1_1_illegal_hole(self):
+        first_bank = (len(self.game.status()) - 2) / 2
         self.assertRaises(IndexError, self.game.play, -1)
-        self.assertRaises(IndexError, self.game.play, 14)
-        self.assertRaises(IndexError, self.game.play, 20)
-        self.assertRaises(IndexError, self.game.play, (len(self.game.status()) - 2) / 2)
+        self.assertRaises(IndexError, self.game.play, 100)
+        self.assertRaises(IndexError, self.game.play, first_bank)
+        self.assertRaises(IndexError, self.game.play, first_bank * 2 + 1)
 
     def test_1_2_simple_move(self):
         self.assertEqual(self.game.play(0), "Player 2 plays next")
@@ -96,6 +97,19 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 1, 0, 2, 7, 6, 6, 6, 0))
         self.assertEqual(self.game.play(0), "Player 2 plays next")
         self.assertEqual(self.game.status(), (0, 1, 6, 6, 0, 6, 4, 0, 0, 7, 6, 6, 6, 0))
+
+    def test_1_4_capture_player_2(self):
+        self.assertEqual(self.game.play(1), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 4, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.play(8), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 5, 5, 0, 4, 0, 5, 5, 5, 5, 0))
+        self.assertEqual(self.game.play(4), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 1, 5, 1, 6, 5, 5, 5, 0))
+        self.assertEqual(self.game.play(7), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (4, 0, 5, 5, 0, 6, 1, 0, 2, 7, 6, 6, 6, 0))
+        self.assertEqual(self.game.play(0), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (0, 1, 6, 6, 0, 6, 4, 0, 0, 7, 6, 6, 6, 0))
+
 
 #    (12, 11, 10,  9, 8, 7)
 # 13                        6

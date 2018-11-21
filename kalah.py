@@ -17,8 +17,8 @@ class Kalah(object):
         if hole == self.holes or hole == self.holes * 2 + 1:
             raise IndexError("Bank!")
 
-        if self.player == 1 and hole >= self.holes or \
-                self.player == 2 and hole < self.holes + 1:
+        if self.player == 1 and hole > self.holes or \
+                self.player == 2 and hole < self.holes:
             raise IndexError("Second player hole!")
 
         if self.board[hole] == 0:
@@ -43,9 +43,11 @@ class Kalah(object):
             self.board[index] += 1
         self.board[hole] = 0
 
-        if self.board[index] == 1:
+        my_bank = self.holes * self.player + 2 - second_player
+
+        if (self.player == 1 and index < self.holes or self.player == 2 and index > self.holes and index < self.holes * 2 + 1) and \
+                self.board[index] == 1:
             if self.board[self.holes * 2 - index] > 0:
-                my_bank = self.holes * self.player + 2 - second_player
                 self.board[my_bank] += self.board[self.holes * 2 - index]
                 self.board[my_bank] += self.board[index]
                 self.board[index] = 0
