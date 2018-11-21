@@ -25,12 +25,14 @@ class Kalah(object):
             raise ValueError("Empty hole!")
 
         second_player = 2 if self.player == 1 else 1
+        other_bank = self.holes * second_player + second_player - 1
         index = 0
         crossing_other_bank = False
+
         for i in range(self.board[hole]):
             index = hole + i + 1
             index %= self.holes * 2 + 2
-            if index == self.holes * second_player + second_player - 1:
+            if index == other_bank:
                 crossing_other_bank = True
                 continue
             self.board[index] += 1
@@ -40,6 +42,14 @@ class Kalah(object):
             index %= self.holes * 2 + 2
             self.board[index] += 1
         self.board[hole] = 0
+
+        if self.board[index] == 1:
+            if self.board[self.holes * 2 - index] > 0:
+                my_bank = self.holes * self.player + 2 - second_player
+                self.board[my_bank] += self.board[self.holes * 2 - index]
+                self.board[my_bank] += self.board[index]
+                self.board[index] = 0
+                self.board[self.holes * 2 - index] = 0
 
         if self.player == 1 and index != self.holes or \
                 self.player == 2 and index != self.holes * 2 + 1:
