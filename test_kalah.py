@@ -175,6 +175,9 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.play(0), "Player 2 plays next")
         self.assertEqual(self.game.status(), (0, 8, 6, 0, 3, 0, 6, 6, 1, 2))
 
+    def test_repr(self):
+        assert repr(Kalah(6, 4)) == "Kalah(4, 6, status=(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0), player=0)"
+
 
 # --------- Board ---------
 #
