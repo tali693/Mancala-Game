@@ -56,6 +56,21 @@ class Kalah(object):
                 self.board[self.holes * 2 - index] = 0
                 self.board[index] = 0
 
+        second_player_sum_seeds = [sum(self.board[i] for i in range(self.range[second_player][0],
+                                                                    self.range[second_player][1] + 1))]
+
+        # End game
+        if second_player_sum_seeds[0] == 0:
+            player_sum_seeds = 0
+            for i in range(self.range[self.player][0], self.range[self.player][1] + 1):
+                player_sum_seeds += self.board[i]
+                self.board[i] = 0
+            self.board[self.bank[self.player]] += player_sum_seeds
+
+            if self.board[self.bank[self.player]] > self.board[self.bank[second_player]]:
+                return f"Player {self.player + 1} wins!"
+            return f"Player {second_player + 1} wins!"
+
         # Change turn if the last seed is not dropped into the bank
         if index != self.bank[self.player]:
             self.player = self.player * -1 + 1
