@@ -67,6 +67,8 @@ class Kalah(object):
                 self.board[i] = 0
             self.board[self.bank[self.player]] += player_sum_seeds
 
+            if self.board[self.bank[self.player]] == self.board[self.bank[second_player]]:
+                return "Tie!"
             if self.board[self.bank[self.player]] > self.board[self.bank[second_player]]:
                 return f"Player {self.player + 1} wins!"
             return f"Player {second_player + 1} wins!"

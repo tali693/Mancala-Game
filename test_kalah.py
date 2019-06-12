@@ -138,9 +138,19 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.status(), (0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 31))
         self.assertEqual(game_status, "Player 2 wins!")
 
+    def test_1_5_end_game_tie(self):
+        self.game.board = [0, 0, 0, 0, 0, 3, 23, 0, 1, 0, 1, 0, 0, 20]
+        self.game.play(5)
+        self.assertEqual(self.game.status(), (0, 0, 0, 0, 0, 0, 24, 1, 2, 0, 1, 0, 0, 20))
+        game_status = self.game.play(8)
+        self.assertEqual(self.game.status(), (0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 24))
+        self.assertEqual(game_status, "Tie!")
+
+
 #    (12, 11, 10,  9, 8, 7)
 # 13                        6
 #    (0,   1,  2,  3, 4, 5)
+
 
 if __name__ == '__main__':
     unittest.main()
