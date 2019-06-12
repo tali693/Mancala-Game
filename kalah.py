@@ -78,3 +78,6 @@ class Kalah(object):
             return f"Player {player + 1} wins!"
 
         return f"Player {self.player + 1} plays next"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.seeds}, {self.holes}, status={self.status()}, player={self.player})"
