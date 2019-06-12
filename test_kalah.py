@@ -158,6 +158,23 @@ class KalahTestCase(unittest.TestCase):
         self.assertEqual(self.game.play(5), "Player 1 wins!")
         self.assertEqual(self.game.status(), (0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 23))
 
+    def test_1_2_game_4_holes(self):
+        self.game = Kalah(4, 4)
+        self.assertEqual(self.game.status(), (4, 4, 4, 4, 0, 4, 4, 4, 4, 0))
+        self.assertEqual(self.game.play(3), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (4, 4, 4, 0, 1, 5, 5, 5, 4, 0))
+        self.assertRaises(IndexError, self.game.play, 12)
+        self.assertEqual(self.game.play(8), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (5, 5, 5, 0, 1, 5, 5, 5, 0, 1))
+        self.assertEqual(self.game.play(0), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (0, 6, 6, 1, 2, 6, 5, 5, 0, 1))
+        self.assertEqual(self.game.play(5), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (1, 7, 6, 1, 2, 0, 6, 6, 1, 2))
+        self.assertEqual(self.game.play(3), "Player 1 plays next")
+        self.assertEqual(self.game.status(), (1, 7, 6, 0, 3, 0, 6, 6, 1, 2))
+        self.assertEqual(self.game.play(0), "Player 2 plays next")
+        self.assertEqual(self.game.status(), (0, 8, 6, 0, 3, 0, 6, 6, 1, 2))
+
 
 # --------- Board ---------
 #
